@@ -22,11 +22,13 @@ html,body {
 .innerStage {
 	
 	background-color: white;
+	position: absolute;
+	
 	height: 90%;
 	width: 90%;
-	position:absolute;
 	left: 5%;
 	top: 5%;
+
 }
 
 
