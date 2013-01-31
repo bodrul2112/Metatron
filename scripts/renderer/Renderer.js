@@ -33,6 +33,7 @@ define(["thirdparty/jquery", "drawing/Point", "drawing/Line", "symmetry/Reflecto
 		
 		this.m_pReflectors = [];
 		this.m_pReflectors.push( new Reflector(0,0,700,700) );
+		this.m_pReflectors.push( new Reflector(250,0,250,700) );
 		this.m_pReflectionBuffer = [];
 	}
 	
@@ -63,19 +64,22 @@ define(["thirdparty/jquery", "drawing/Point", "drawing/Line", "symmetry/Reflecto
 		oLine.addPoint( oPoint );
 		this.m_pLines.push( oLine );
 		this.m_oLastLine = oLine;
+		
+		this.m_pReflectionBuffer = [];
+		for(var i=0; i<this.m_pReflectors.length; i++) {
+			
+			this.m_pReflectionBuffer[i] = new Line();
+		}
 	} 
 	
 	Renderer.prototype.commenceDrawing = function( oPoint ) {
 		
 		this.m_oLastLine.addPoint( oPoint );
 		this.m_oLastLine.render( this.m_oContext );
-		
-		this.computeReflections( oPoint );
+		this.addReflectionPoint( oPoint );
 	}
 	
-	Renderer.prototype.computeReflections = function( oPoint ) {
-		
-		this.m_pReflectionBuffer = [];
+	Renderer.prototype.addReflectionPoint = function( oPoint ) {
 		
 		for(var i=0; i<this.m_pReflectors.length; i++) {
 			
@@ -94,20 +98,15 @@ define(["thirdparty/jquery", "drawing/Point", "drawing/Line", "symmetry/Reflecto
 			
 			var pCurrentLinePoints = this.m_oLastLine.getPoints();
 			
-			for(var i=0; i<pCurrentLinePoints.length; i++) {
-				
-				var p = pCurrentLinePoints[i];
+				var p = oPoint;
 				var px = p.x - p0.x;
 				var py = p.y - p0.y;
 				var w = ( nx*px + ny*py );
 				var rx = ( 2*p0.x - p.x + 2*w*nx );
 				var ry = ( 2*p0.y - p.y + 2*w*ny );
 				
-				oLine.addPoint( new Point(rx, ry) );
-			}
-			
-			this.m_pReflectionBuffer.push( oLine );
-			oLine.render( this.m_oContext );
+			this.m_pReflectionBuffer[i].addPoint( new Point(rx, ry) );
+			this.m_pReflectionBuffer[i].render( this.m_oContext );
 			
 		}
 	}
