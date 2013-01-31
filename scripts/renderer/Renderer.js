@@ -1,5 +1,5 @@
 
-define(["thirdparty/jquery", "drawing/Point", "drawing/Line"], function( jQuery, Point, Line ) {
+define(["thirdparty/jquery", "drawing/Point", "drawing/Line", "symmetry/Reflector"], function( jQuery, Point, Line, Reflector ) {
 	
 	var Renderer = function() {
 		
@@ -30,6 +30,10 @@ define(["thirdparty/jquery", "drawing/Point", "drawing/Line"], function( jQuery,
 		
 		this.m_pLines = [];
 		this.m_oLastLine;
+		
+		this.m_pReflectors = [];
+		this.m_pReflectors.push( new Reflector(0,0,700,700) );
+		this.m_pReflectionBuffer = [];
 	}
 	
 	Renderer.prototype.clear = function() {
@@ -39,6 +43,12 @@ define(["thirdparty/jquery", "drawing/Point", "drawing/Line"], function( jQuery,
 	} 
 	
 	Renderer.prototype.renderAllLines = function() {
+		
+		for(var i=0; i<this.m_pReflectors.length; i++) {
+			
+			var oReflector = this.m_pReflectors[i];
+			oReflector.render( this.m_oContext );
+		}
 
 		for(var i=0; i<this.m_pLines.length; i++ ) {
 		
@@ -59,13 +69,63 @@ define(["thirdparty/jquery", "drawing/Point", "drawing/Line"], function( jQuery,
 		
 		this.m_oLastLine.addPoint( oPoint );
 		this.m_oLastLine.render( this.m_oContext );
+		
+		this.computeReflections( oPoint );
+	}
+	
+	Renderer.prototype.computeReflections = function( oPoint ) {
+		
+		this.m_pReflectionBuffer = [];
+		
+		for(var i=0; i<this.m_pReflectors.length; i++) {
+			
+			var oReflector = this.m_pReflectors[i];
+			var p0 = oReflector.getStart();
+			var p1 = oReflector.getEnd();
+			
+			var nx = p1.x - p0.x;
+			var ny = p1.y - p0.y;
+			
+			var d = Math.sqrt( nx*nx + ny*ny );
+			nx = nx/d;
+			ny = ny/d;
+			
+			var oLine = new Line();
+			
+			var pCurrentLinePoints = this.m_oLastLine.getPoints();
+			
+			for(var i=0; i<pCurrentLinePoints.length; i++) {
+				
+				var p = pCurrentLinePoints[i];
+				var px = p.x - p0.x;
+				var py = p.y - p0.y;
+				var w = ( nx*px + ny*py );
+				var rx = ( 2*p0.x - p.x + 2*w*nx );
+				var ry = ( 2*p0.y - p.y + 2*w*ny );
+				
+				oLine.addPoint( new Point(rx, ry) );
+			}
+			
+			this.m_pReflectionBuffer.push( oLine );
+			oLine.render( this.m_oContext );
+			
+		}
 	}
 	
 	Renderer.prototype.endDrawing = function( oPoint ) {
 		
 		this.m_oLastPoint = null;
 		this.clear();
+		this.transferReflections();
 		this.renderAllLines();
+	}
+	
+	Renderer.prototype.transferReflections = function() {
+		
+		for(var i=0; i<this.m_pReflectionBuffer.length; i++ ) {
+			
+			this.m_pLines.push( this.m_pReflectionBuffer[i] );
+		}
 	}
 	
 	Renderer.prototype.lol = function()

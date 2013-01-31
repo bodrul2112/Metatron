@@ -17,6 +17,8 @@ require( ["plugins/domReady"], function(domReady){
 			window.onresize = function(){
 				oTouchController.handleResize();
 			};
+			
+			oRenderer.renderAllLines();
 		});
 		
 	});
