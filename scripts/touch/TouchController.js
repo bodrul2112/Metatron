@@ -34,6 +34,7 @@ define(["thirdparty/jquery", "drawing/Point"], function( jQuery, Point ) {
 	TouchController.prototype._mouseup = function() {
 		
 		this.m_bIsDragging = false;
+		this.m_oRenderer.endDrawing();
 		
 	}
 	

@@ -1,5 +1,5 @@
 
-define(["thirdparty/jquery", "drawing/Point"], function( jQuery, Point ) {
+define(["thirdparty/jquery", "drawing/Point", "drawing/Line"], function( jQuery, Point, Line ) {
 	
 	var Renderer = function() {
 		
@@ -27,23 +27,45 @@ define(["thirdparty/jquery", "drawing/Point"], function( jQuery, Point ) {
 		this.m_pPoints.push(new Point(200,50));
 		
 		this.m_oLastPoint;
+		
+		this.m_pLines = [];
+		this.m_oLastLine;
+	}
+	
+	Renderer.prototype.clear = function() {
+		
+		this.m_oContext.fillStyle = "white";
+		this.m_oContext.fillRect(0, 0, this.m_nWidth, this.m_nHeight);
+	} 
+	
+	Renderer.prototype.renderAllLines = function() {
+
+		for(var i=0; i<this.m_pLines.length; i++ ) {
+		
+			var oLine = this.m_pLines[i];
+			oLine.render( this.m_oContext );
+		}
 	}
 	
 	Renderer.prototype.startDrawing = function( oPoint ) {
 		
-		this.m_oLastPoint = oPoint;
-		this.m_oContext.beginPath();
-		this.m_oContext.moveTo( oPoint.x, oPoint.y ); 
+		var oLine = new Line();
+		oLine.addPoint( oPoint );
+		this.m_pLines.push( oLine );
+		this.m_oLastLine = oLine;
 	} 
 	
 	Renderer.prototype.commenceDrawing = function( oPoint ) {
 		
-		this.m_oContext.lineTo( oPoint.x, oPoint.y );
-		this.m_oContext.stroke();
-		this.m_oContext.beginPath();
-		this.m_oContext.moveTo( oPoint.x, oPoint.y ); 
-		this.m_oLastPoint = oPoint;
-		this.lol();
+		this.m_oLastLine.addPoint( oPoint );
+		this.m_oLastLine.render( this.m_oContext );
+	}
+	
+	Renderer.prototype.endDrawing = function( oPoint ) {
+		
+		this.m_oLastPoint = null;
+		this.clear();
+		this.renderAllLines();
 	}
 	
 	Renderer.prototype.lol = function()
