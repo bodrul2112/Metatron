@@ -32,8 +32,9 @@ define(["thirdparty/jquery", "drawing/Point", "drawing/Line", "symmetry/Reflecto
 		this.m_oLastLine;
 		
 		this.m_pReflectors = [];
-		this.m_pReflectors.push( new Reflector(0,0,700,700) );
-		this.m_pReflectors.push( new Reflector(250,0,250,700) );
+		this.m_pReflectors.push( new Reflector(0,350,700,350) );
+		this.m_pReflectors.push( new Reflector(350,0,350,700) );
+		this.m_pCompletedReflections = []; 
 		this.m_pReflectionBuffer = [];
 	}
 	
@@ -44,7 +45,7 @@ define(["thirdparty/jquery", "drawing/Point", "drawing/Line", "symmetry/Reflecto
 	} 
 	
 	Renderer.prototype.renderAllLines = function() {
-		
+
 		for(var i=0; i<this.m_pReflectors.length; i++) {
 			
 			var oReflector = this.m_pReflectors[i];
@@ -54,7 +55,13 @@ define(["thirdparty/jquery", "drawing/Point", "drawing/Line", "symmetry/Reflecto
 		for(var i=0; i<this.m_pLines.length; i++ ) {
 		
 			var oLine = this.m_pLines[i];
-			oLine.render( this.m_oContext );
+			oLine.renderAllPoints( this.m_oContext );
+		}
+		
+		for(var i=0; i<this.m_pCompletedReflections.length; i++) {
+			
+			var oLine = this.m_pCompletedReflections[i];
+			oLine.renderAllPoints( this.m_oContext );
 		}
 	}
 	
@@ -123,7 +130,7 @@ define(["thirdparty/jquery", "drawing/Point", "drawing/Line", "symmetry/Reflecto
 		
 		for(var i=0; i<this.m_pReflectionBuffer.length; i++ ) {
 			
-			this.m_pLines.push( this.m_pReflectionBuffer[i] );
+			this.m_pCompletedReflections.push( this.m_pReflectionBuffer[i] );
 		}
 	}
 	
