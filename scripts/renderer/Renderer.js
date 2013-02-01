@@ -32,8 +32,8 @@ define(["thirdparty/jquery", "drawing/Point", "drawing/Line", "symmetry/Reflecto
 		this.m_oLastLine;
 		
 		this.m_pReflectors = [];
-		this.m_pReflectors.push( new Reflector(0,350,700,350) );
-		this.m_pReflectors.push( new Reflector(350,0,350,700) );
+		this.m_pReflectors.push( new Reflector(0,0,700,700) );
+		this.m_pReflectors.push( new Reflector(0,0,750,700) );
 		this.m_pCompletedReflections = []; 
 		this.m_pReflectionBuffer = [];
 	}
