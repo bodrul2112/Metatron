@@ -4,6 +4,7 @@ define(["thirdparty/jquery", "drawing/Point", "drawing/Line", "symmetry/Reflecto
 	var Renderer = function() {
 		
 		this.m_eWrapper = $('.innerStage');
+		this.m_eOuterStage = $('.outerStage');
 		
 		this.m_eCanvas =  document.getElementById('drawingArea');
 		
@@ -32,10 +33,13 @@ define(["thirdparty/jquery", "drawing/Point", "drawing/Line", "symmetry/Reflecto
 		this.m_oLastLine;
 		
 		this.m_pReflectors = [];
-		this.m_pReflectors.push( new Reflector(0,0,700,700) );
-		this.m_pReflectors.push( new Reflector(0,0,750,700) );
 		this.m_pCompletedReflections = []; 
 		this.m_pReflectionBuffer = [];
+		
+	}
+	
+	Renderer.prototype.addReflector = function( oReflector ) {
+		this.m_pReflectors.push( oReflector )
 	}
 	
 	Renderer.prototype.clear = function() {

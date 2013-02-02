@@ -1,12 +1,18 @@
 
-define(["thirdparty/jquery", "drawing/Point"], function( jQuery, Point ) {
+define(["thirdparty/jquery", "drawing/Point", "symmetry/Handle"], function( jQuery, Point, Handle ) {
 	
 	
 	var Reflector = function( nX1, nY1, nX2, nY2 ){
 		
 		this.m_oStartPoint = new Point(nX1, nY1);
 		this.m_oEndPoint = new Point(nX2, nY2);
-		this.m_sLineColor = "red";
+		this.m_sLineColor = "rgba(78,166,234,0.2);";
+		
+		this.m_oHandleOne = new Handle(0,0);
+		this.m_oHandleTwo = new Handle(300,0);
+		this.m_pHandles = [];
+		this.m_pHandles.push( this.m_oHandleOne );
+		this.m_pHandles.push( this.m_oHandleTwo );
 	}
 	
 	Reflector.prototype.getStart = function() {
@@ -17,6 +23,11 @@ define(["thirdparty/jquery", "drawing/Point"], function( jQuery, Point ) {
 	Reflector.prototype.getEnd = function() {
 		
 		return this.m_oEndPoint;
+	}
+	
+	Reflector.prototype.getHandles = function() {
+		
+		return this.m_pHandles;
 	}
 	
 	Reflector.prototype.render = function( ctx ) {
