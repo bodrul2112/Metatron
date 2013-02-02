@@ -23,5 +23,12 @@ define(["thirdparty/jquery"], function( jQuery ){
 		this.y = nY;
 	}
 	
+	Point.prototype.setXY = function( nX, nY ) {
+		
+		this.x = nX;
+		this.y = nY;
+	}
+	
+	
 	return Point;
 });

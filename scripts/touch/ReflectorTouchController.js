@@ -15,9 +15,9 @@ define(["thirdparty/jquery", "drawing/Point", "symmetry/Reflector"], function( j
 		this.m_bDragging = false;
 		this.m_oDraggingHandle;
 		
-		var oReflectorOne = new Reflector(0,0,700,700);
-		var oReflectorTwo = new Reflector(0,0,750,700);
-		debugger
+		var oReflectorOne = new Reflector(0,0,700,700, oRenderer );
+		var oReflectorTwo = new Reflector(0,0,750,700, oRenderer );
+
 		oRenderer.addReflector( oReflectorOne );
 		oRenderer.addReflector( oReflectorTwo );
 		
@@ -27,7 +27,6 @@ define(["thirdparty/jquery", "drawing/Point", "symmetry/Reflector"], function( j
 	
 	ReflectorTouchController.prototype.addReflectionHandles = function( oReflector ) {
 		
-		debugger;
 		var pHandles = oReflector.getHandles();
 		
 		for( var i=0; i<pHandles.length; i++ ) {

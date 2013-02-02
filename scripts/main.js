@@ -5,8 +5,10 @@ require( ["plugins/domReady"], function(domReady){
     
 	domReady(function(){
 		
-		require(["thirdparty/jquery","renderer/Renderer", "touch/TouchController", "touch/ReflectorTouchController"], function(jQuery, Renderer, TouchController, ReflectorTouchController) {
+		require(["thirdparty/jquery", "global/Configuration", "renderer/Renderer", "touch/TouchController", "touch/ReflectorTouchController"], function(jQuery, Configuration, Renderer, TouchController, ReflectorTouchController) {
 			
+			
+			CONF = new Configuration();
 			var oRenderer = new Renderer();
 			
 			var eInnerStageWrapper = $(".innerStage");

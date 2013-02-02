@@ -130,12 +130,38 @@ define(["thirdparty/jquery", "drawing/Point", "drawing/Line", "symmetry/Reflecto
 		this.renderAllLines();
 	}
 	
+	Renderer.prototype.refresh = function() {
+		
+		this.clear();
+		this.renderAllLines();
+	}
+	
 	Renderer.prototype.transferReflections = function() {
 		
 		for(var i=0; i<this.m_pReflectionBuffer.length; i++ ) {
 			
 			this.m_pCompletedReflections.push( this.m_pReflectionBuffer[i] );
 		}
+	}
+	
+	Renderer.prototype.recalculateAllReflections = function() {
+		
+		var pRecalculated = [];
+		for(var i=0; i<this.m_pLines.length; i++) {
+			pRecalculated.push(new Line());
+		}
+		
+		for(var i=0; i<this.m_pLines.length; i++ ) {
+			var pPoints = this.m_pLines[i].getPoints();
+			for(var j=0; j<pPoints.length; j++) {
+				
+				var oPoint = pPoints[j];
+				this.addReflectionPoint( oPoint );
+			}
+		}
+		
+		this.m_pCompletedReflections = pRecalculated;
+		
 	}
 	
 	Renderer.prototype.lol = function()
