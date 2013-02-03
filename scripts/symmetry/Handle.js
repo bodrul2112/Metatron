@@ -32,12 +32,12 @@ define(["thirdparty/jquery", "services/TemplateService","drawing/Point"], functi
 	// not exactly getting marks for genius, but this is a small app after all and my care this <----> much
 	ReflectionHandle.prototype._updateHandlePosition = function() {
 		
-		//var nXOffSet = CONF.getInnerStage().position().left - (this.m_eElement.width()/2);
-		//var nYOffSet = CONF.getInnerStage().position().top - (this.m_eElement.height()/2);
+		var nXOffSet = CONF.getInnerStage().position().left - (this.m_eElement.width()/2);
+		var nYOffSet = CONF.getInnerStage().position().top - (this.m_eElement.height()/2);
 
 		//TODO: make these consts
-		var nXOffSet = 20;
-		var nYOffSet = 18.5;
+		//var nXOffSet = 20;
+		//var nYOffSet = 18.5;
 		
 		this.m_oPoint.setXY( this.m_nMidX-nXOffSet, this.m_nMidY-nYOffSet );
 		
