@@ -8,8 +8,8 @@ define(["thirdparty/jquery", "drawing/Point", "symmetry/Handle"], function( jQue
 		this.m_oEndPoint = new Point(nX2, nY2);
 		this.m_sLineColor = "rgba(78,166,234,0.2);";
 		
-		this.m_oHandleOne = new Handle(0,0, this.m_oStartPoint );
-		this.m_oHandleTwo = new Handle(300,0, this.m_oEndPoint );
+		this.m_oHandleOne = new Handle(nX1,nY1, this.m_oStartPoint );
+		this.m_oHandleTwo = new Handle(nX2,nY2, this.m_oEndPoint );
 		this.m_pHandles = [];
 		this.m_pHandles.push( this.m_oHandleOne );
 		this.m_pHandles.push( this.m_oHandleTwo );
@@ -18,6 +18,8 @@ define(["thirdparty/jquery", "drawing/Point", "symmetry/Handle"], function( jQue
 		this.m_oHandleTwo.addHandleListener( this );
 		
 		this.m_oRenderer = oRenderer; 
+		
+		//this.m_oHandleOne.move(nX1, nY1);
 	}
 	
 	Reflector.prototype.getStart = function() {
@@ -46,7 +48,6 @@ define(["thirdparty/jquery", "drawing/Point", "symmetry/Handle"], function( jQue
 	
 	Reflector.prototype.updateHandlePosition = function(){
 		
-		console.log("updating")
 		this.m_oRenderer.refresh();
 	}
 	
