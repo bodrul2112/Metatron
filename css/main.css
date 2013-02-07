@@ -49,10 +49,11 @@ html,body {
 	background-color: white;
 	position: absolute;
 	
-	height: 90%;
-	width: 90%;
-	left: 5%;
-	top: 5%;
+	/* height: 100%;
+	width: 100%; 
+	left: 40px;
+	top: 40px;
+	*/
 	
 	-webkit-box-shadow: 0px 0px 30px 3px rgba(100, 100, 100, 0.4);
 	box-shadow: 0px 0px 30px 3px rgba(100, 100, 100, 0.4);
@@ -71,4 +72,24 @@ html,body {
 	width: 25px;
 }
 
+.menuBar {
+	
+	position: absolute;
+	z-index: 5;
+	width: 300px;
+	height: 80px;
+	
+	border: 2px solid #BBB;
+	border-radius: 15px;
+	
+	background: #ffffff; /* Old browsers */
+background: -moz-linear-gradient(top,  #ffffff 0%, #f1f1f1 22%, #e1e1e1 22%, #e1e1e1 23%, #f6f6f6 100%); /* FF3.6+ */
+background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#ffffff), color-stop(22%,#f1f1f1), color-stop(22%,#e1e1e1), color-stop(23%,#e1e1e1), color-stop(100%,#f6f6f6)); /* Chrome,Safari4+ */
+background: -webkit-linear-gradient(top,  #ffffff 0%,#f1f1f1 22%,#e1e1e1 22%,#e1e1e1 23%,#f6f6f6 100%); /* Chrome10+,Safari5.1+ */
+background: -o-linear-gradient(top,  #ffffff 0%,#f1f1f1 22%,#e1e1e1 22%,#e1e1e1 23%,#f6f6f6 100%); /* Opera 11.10+ */
+background: -ms-linear-gradient(top,  #ffffff 0%,#f1f1f1 22%,#e1e1e1 22%,#e1e1e1 23%,#f6f6f6 100%); /* IE10+ */
+background: linear-gradient(to bottom,  #ffffff 0%,#f1f1f1 22%,#e1e1e1 22%,#e1e1e1 23%,#f6f6f6 100%); /* W3C */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#f6f6f6',GradientType=0 ); /* IE6-9 */
+	
+}
 
