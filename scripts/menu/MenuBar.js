@@ -11,7 +11,7 @@ define(["thirdparty/jquery","services/TemplateService"], function( jQuery, tpl )
 	
 	MenuBar.prototype.resize = function() {
 		
-		var nTop = this.m_eContainer.height()-40;
+		var nTop = this.m_eContainer.height()-80;
 		var nLeft = (this.m_eContainer.width() - this.m_eElement.width())/2;
 		this.m_eElement.css("top", nTop );
 		this.m_eElement.css("left", nLeft );

@@ -10,7 +10,7 @@ define(["thirdparty/jquery"], function( jQuery ) {
 		this.m_pUpdateListeners = [];
 		
 		this.m_nBorderWidth = 40;
-		this.m_nBottomBarAreaHeight = 60;
+		this.m_nBottomBarAreaHeight = 100;
 		
 		this.init();
 	}

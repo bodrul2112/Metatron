@@ -22,7 +22,7 @@ define(["thirdparty/jquery", "drawing/Point", "symmetry/Reflector"], function( j
 		
 		//TODO: get rid of these
 		var oReflectorOne = new Reflector(0,nY,CONF.getOuterStage().width()-30,nY, oRenderer );
-		var oReflectorTwo = new Reflector(nX,0,nX,CONF.getOuterStage().height()-90, oRenderer );
+		var oReflectorTwo = new Reflector(nX,0,nX,CONF.getInnerStage().height()+CONF.getInnerStage().position().top+5, oRenderer );
 
 		oRenderer.addReflector( oReflectorOne );
 		oRenderer.addReflector( oReflectorTwo );
