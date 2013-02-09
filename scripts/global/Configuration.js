@@ -2,6 +2,12 @@
 define(["thirdparty/jquery"], function( jQuery ) {
 
 	var Configuration = function() {
+		
+		this.NEW = "NEW"
+		this.DRAW = "DRAW";
+		this.NAVIGATE = "NAVIGATE";
+		this.SYMMETRY = "SYMMETRY";
+		this.MENU = "MENU";
 	
 		this.m_eOuterStage = $('.outerStage');
 		this.m_eInnerStage = $('.innerStage');
@@ -13,6 +19,8 @@ define(["thirdparty/jquery"], function( jQuery ) {
 		this.m_nBottomBarAreaHeight = 100;
 		
 		this.init();
+		
+		this.m_sState = this.DRAW;
 	}
 	
 	Configuration.prototype.init = function() {
@@ -53,9 +61,14 @@ define(["thirdparty/jquery"], function( jQuery ) {
 		return this.m_eInnerStage;
 	}
 	
-	Configuration.prototype.getBottomBarHeight = function() {
+	Configuration.prototype.getState = function() {
 		
-		return this.m_nBottomBarAreaHeight;
+		return this.m_sState;
+	}
+	
+	Configuration.prototype.setState = function( sState ) {
+		
+		this.m_sState = sState;
 	}
 	
 	return Configuration;

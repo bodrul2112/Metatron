@@ -11,14 +11,22 @@ define(["thirdparty/jquery", "drawing/Point"], function( jQuery, Point ) {
 		
 		this.m_bIsDragging = false;
 		
-		this.m_eCanvas.mousedown( function(e){ this._mousedown(e); }.bind(this) );
-		this.m_eCanvas.mousemove( function(e){ this._mousemove(e); }.bind(this) );
-		this.m_eCanvas.mouseup( function(e){ this._mouseup(e); }.bind(this) );
-		this.m_eCanvas.mouseleave( function(e){ this._mouseleave(e); }.bind(this) );
-		//this.m_eCanvas.mousemove(this._mousemove.bind(this) );
-		//this.m_eCanvas.mouseup(this._mouseup.bind(this) );
-		//this.m_eCanvas.mouseleave(this._mouseleave.bind(this) );
+		this._initialiseMouseControls();
+	}
+	
+	TouchController.prototype._initialiseMouseControls = function() {
 		
+		this.m_eCanvas.mousedown(  function(e){ this._propagateMouseResponse(  this._mousedown.bind(this), e ); }.bind(this) );
+		this.m_eCanvas.mousemove(  function(e){ this._propagateMouseResponse(  this._mousemove.bind(this), e ); }.bind(this) );
+		this.m_eCanvas.mouseup(    function(e){ this._propagateMouseResponse(  this._mouseup.bind(this),   e ); }.bind(this) );
+		this.m_eCanvas.mouseleave( function(e){ this._propagateMouseResponse(  this._mouseleave.bind(this),e ); }.bind(this) );
+	}
+	
+	TouchController.prototype._propagateMouseResponse = function( fFunction, e ) {
+		
+		if(CONF.getState()==CONF.DRAW){
+			fFunction(e)
+		}
 	}
 	
 	TouchController.prototype.handleResize = function() {

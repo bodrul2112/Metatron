@@ -8,11 +8,15 @@ define(["thirdparty/jquery","services/TemplateService","menu/MenuButton"], funct
 		
 		this.m_eContainer.append( this.m_eElement );	
 		this.m_eButtonContainer =  this.m_eElement.find(".buttonContainer");
+		//this.m_pLabels = ["[new]","[nav]","[draw]","[symm]","[menu]"];
+		this.m_pLabels = [CONF.NEW, CONF.NAVIGATE, CONF.DRAW, CONF.SYMMETRY, CONF.MENU];
 		
 		this.m_nButtonWidthEdge = 15;
 		this.m_pMenuButtons = [];
 		this._initMenuBarArea();
 		this._initButtons(5);
+		this.m_pMenuButtons[2]._click();
+		
 	}
 	
 	MenuBar.prototype._initMenuBarArea = function() {
@@ -32,7 +36,7 @@ define(["thirdparty/jquery","services/TemplateService","menu/MenuButton"], funct
 		
 		for(var i=0; i<nButtons; i++) {
 			
-			var oMenuButton = new MenuButton( this );
+			var oMenuButton = new MenuButton( this, this.m_pLabels[i] );
 			var eMenuButton = oMenuButton.getElement();
 			eMenuButton.width( nButtonWidth );
 			this.m_eButtonContainer.append( eMenuButton );
