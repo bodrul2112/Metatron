@@ -55,16 +55,16 @@ define(["thirdparty/jquery", "drawing/Point", "drawing/Line", "symmetry/Reflecto
 			var oReflector = this.m_pReflectors[i];
 			oReflector.render( this.m_oContext );
 		}
-
-		for(var i=0; i<this.m_pLines.length; i++ ) {
-		
-			var oLine = this.m_pLines[i];
-			oLine.renderAllPoints( this.m_oContext );
-		}
 		
 		for(var i=0; i<this.m_pCompletedReflections.length; i++) {
 			
 			var oLine = this.m_pCompletedReflections[i];
+			oLine.renderAllPoints( this.m_oContext );
+		}
+		
+		for(var i=0; i<this.m_pLines.length; i++ ) {
+			
+			var oLine = this.m_pLines[i];
 			oLine.renderAllPoints( this.m_oContext );
 		}
 	}
