@@ -16,6 +16,7 @@ define(["thirdparty/jquery", "services/TemplateService"], function( jQuery, tpl 
 	
 	MenuButton.prototype._click = function(e) {
 		
+		e.preventDefault();
 		this.m_oMenuBar.blurAll();
 		this.m_eElement.addClass("clicked");
 		this.m_bIsActive = true;
