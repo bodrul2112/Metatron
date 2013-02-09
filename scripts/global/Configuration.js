@@ -53,6 +53,11 @@ define(["thirdparty/jquery"], function( jQuery ) {
 		return this.m_eInnerStage;
 	}
 	
+	Configuration.prototype.getBottomBarHeight = function() {
+		
+		return this.m_nBottomBarAreaHeight;
+	}
+	
 	return Configuration;
 
 });

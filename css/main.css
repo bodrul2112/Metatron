@@ -6,6 +6,7 @@ html,body {
 	padding: 0px;
 	margin: 0px;
 	
+	overflow: hidden;
 	overflow-x: hidden;
 	overflow-y: hidden;
 }
@@ -30,6 +31,8 @@ html,body {
 	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#f6f6f6',GradientType=0 ); /* IE6-9 */
 		
 	overflow: hidden;
+	overflow-x: hidden;
+	overflow-y: hidden;
 }
 
 .innerHandleStage {
@@ -94,6 +97,34 @@ html,body {
 	
 }
 
-.menuBar .buttonContainer {
+.buttonContainer {
 	
+	position: absolute;
 }
+
+.menuBarButton {
+	
+	position: relative;
+	float: left;
+	height: 100%;
+	border-left: 1px solid #CCC;
+	
+	-moz-box-shadow: inset 0 0 10px 0px CCC;
+	-webkit-box-shadow: inset 0 0 10px 0px #CCC;
+	box-shadow: inset 0 0 10px 0px #CCC;
+}
+
+.rightMostButton {
+	
+	border-right:1px solid #CCC;
+}
+
+.menuBarButton.clicked {
+	
+	-moz-box-shadow: inset 0 0 31px 2px #AAA;
+	-webkit-box-shadow: inset 0 0 31px 2px #AAA;
+	box-shadow: inset 0 0 31px 2px #AAA;
+}
+
+
+
