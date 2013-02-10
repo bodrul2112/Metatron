@@ -5,10 +5,14 @@ require( ["plugins/domReady"], function(domReady){
     
 	domReady(function(){
 		
-		require(["thirdparty/jquery", "global/Configuration", "renderer/Renderer", "touch/TouchController", "touch/ReflectorTouchController","menu/MenuBar"], function(jQuery, Configuration, Renderer, TouchController, ReflectorTouchController, MenuBar) {
+		require(["thirdparty/jquery", "global/Configuration", "renderer/Renderer", "touch/TouchController",
+		         "touch/ReflectorTouchController", "touch/TouchNormalizer", "menu/MenuBar"], 
+		         
+		         function(jQuery, Configuration, Renderer, TouchController, ReflectorTouchController, TouchNormalizer, MenuBar) {
 			
 			
 			CONF = new Configuration();
+			TOUCH_NORMALIZER = new TouchNormalizer();
 			var oRenderer = new Renderer();
 			
 			var eInnerStageWrapper = $(".innerStage");
