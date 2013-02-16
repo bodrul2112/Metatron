@@ -1,7 +1,10 @@
 
 
-
-require( ["plugins/domReady"], function(domReady){
+//Since optimizer wont load these from inside the domReady anonymouse function we have to load them here
+require( ["plugins/domReady","thirdparty/jquery", "global/Configuration", "renderer/Renderer", "touch/TouchController",
+		         "touch/ReflectorTouchController", "touch/TouchNormalizer", "menu/MenuBar"], 
+				 
+				 function(domReady, jQuery, Configuration, Renderer, TouchController, ReflectorTouchController, TouchNormalizer, MenuBar){
     
 	domReady(function(){
 		
@@ -9,7 +12,6 @@ require( ["plugins/domReady"], function(domReady){
 		         "touch/ReflectorTouchController", "touch/TouchNormalizer", "menu/MenuBar"], 
 		         
 		         function(jQuery, Configuration, Renderer, TouchController, ReflectorTouchController, TouchNormalizer, MenuBar) {
-			
 			
 			CONF = new Configuration();
 			TOUCH_NORMALIZER = new TouchNormalizer();
